@@ -6,6 +6,7 @@ class User {
     this.name = name
     this.email = email;
   }
+}
 
 
 class UserRepository {
