@@ -1,10 +1,10 @@
 class Singleton {
   constructor() {
     if (Singleton.instance) {
-      return Singleton.instance; 
+      return Singleton.instance; // If already available, return it without creating a new one
     }
 
-    Singleton.instance = this; // Save the instance
+    Singleton.instance = this; // Store the instance 
     this.data = "I am the singleton instance.";
   }
 

@@ -1,30 +1,71 @@
-// Implementation (Concrete classes)
-class Car {
-  start() {
-    console.log("Car starting...");
+// The Bridge Pattern is used when you have two dimensions of variability (e.g., types of vehicles and how they are started or operated)
+
+// Implementor
+class Engine {
+  startEngine() {
+    throw new Error("The method startEngine() must be implemented");
   }
 }
 
-class Bike {
-  start() {
-    console.log("Bike starting...");
+// Concrete Implementors
+class CarEngine extends Engine {
+  startEngine() {
+    console.log("Car engine starting...");
   }
 }
 
-// Abstraction (Abstract class)
+class BikeEngine extends Engine {
+  startEngine() {
+    console.log("Bike engine starting...");
+  }
+}
+
+// Abstraction
 class Vehicle {
-  constructor(implementor) {
-    this.implementor = implementor;
+  constructor(engine) {
+    this.engine = engine;
   }
 
   start() {
-    this.implementor.start();
+    console.log("Vehicle starting...");
+    this.engine.startEngine();
+  }
+}
+
+// Refined Abstraction
+class Car extends Vehicle {
+  constructor(engine) {
+    super(engine);
+  }
+
+  start() {
+    console.log("Car is getting ready to start.");
+    super.start();
+  }
+}
+
+class Bike extends Vehicle {
+  constructor(engine) {
+    super(engine);
+  }
+
+  start() {
+    console.log("Bike is getting ready to start.");
+    super.start();
   }
 }
 
 // Client code
-const car = new Vehicle(new Car());
-const bike = new Vehicle(new Bike());
+const car = new Car(new CarEngine());
+car.start();
+// Output:
+// Car is getting ready to start.
+// Vehicle starting...
+// Car engine starting...
 
-car.start(); // Output: Car starting...
-bike.start(); // Output: Bike starting...
+const bike = new Bike(new BikeEngine());
+bike.start();
+// Output:
+// Bike is getting ready to start.
+// Vehicle starting...
+// Bike engine starting...

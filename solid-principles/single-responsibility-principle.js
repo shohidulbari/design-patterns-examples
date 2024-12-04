@@ -6,6 +6,11 @@ class User {
     this.name = name
     this.email = email;
   }
+
+  // shouldn't be here
+  // sendWelcomeEmail() {
+  //   console.log(`Saving user ${user.name} to the database.`); 
+  // } 
 }
 
 

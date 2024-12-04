@@ -1,34 +1,60 @@
+// Abstract Expression
 class Expression {
-  interpret(context) {}
+  interpret(context) {
+    throw new Error("This method must be implemented");
+  }
 }
 
-class TerminalExpression extends Expression {
-  constructor(data) {
+// Terminal Expression: Numbers
+class NumberExpression extends Expression {
+  constructor(value) {
     super();
-    this.data = data;
+    this.value = value;
   }
 
   interpret(context) {
-    return context.includes(this.data);
+    return this.value;
   }
 }
 
-class OrExpression extends Expression {
-  constructor(expr1, expr2) {
+// Non-Terminal Expression: Addition
+class AddExpression extends Expression {
+  constructor(left, right) {
     super();
-    this.expr1 = expr1;
-    this.expr2 = expr2;
+    this.left = left;
+    this.right = right;
   }
 
   interpret(context) {
-    return this.expr1.interpret(context) || this.expr2.interpret(context);
+    return this.left.interpret(context) + this.right.interpret(context);
   }
 }
 
-// Client code
-const isJohn = new TerminalExpression("John");
-const isDoe = new TerminalExpression("Doe");
-const isJohnOrDoe = new OrExpression(isJohn, isDoe);
+// Non-Terminal Expression: Multiplication
+class MultiplyExpression extends Expression {
+  constructor(left, right) {
+    super();
+    this.left = left;
+    this.right = right;
+  }
 
-console.log(isJohnOrDoe.interpret("John Smith")); // true
-console.log(isJohnOrDoe.interpret("Jane Doe")); // true
+  interpret(context) {
+    return this.left.interpret(context) * this.right.interpret(context);
+  }
+}
+
+// Client Code
+const context = {}; // Context can hold variables or state if needed
+
+// Build the expression: (2 + 3) * 4
+const expression = new MultiplyExpression(
+  new AddExpression(
+    new NumberExpression(2),
+    new NumberExpression(3)
+  ),
+  new NumberExpression(4)
+);
+
+// Interpret the expression
+const result = expression.interpret(context);
+console.log(`Result: ${result}`); // Output: Result: 20

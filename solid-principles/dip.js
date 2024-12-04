@@ -27,7 +27,6 @@
 //   }
 // }
 
-// // Usage
 // const notificationService = new NotificationService();
 // notificationService.notifyByEmail("Hello via Email!");
 // notificationService.notifyBySMS("Hello via SMS!");

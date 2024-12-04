@@ -23,21 +23,18 @@ class PaymentMethod {
 class CreditCardPayment extends PaymentMethod {
   process(amount) {
     console.log(`Processing credit card payment of $${amount}`);
-    // Logic for credit card payment
   }
 }
 
 class PayPalPayment extends PaymentMethod {
   process(amount) {
     console.log(`Processing PayPal payment of $${amount}`);
-    // Logic for PayPal payment
   }
 }
 
 class GooglePayPayment extends PaymentMethod {
   process(amount) {
     console.log(`Processing Google Pay payment of $${amount}`);
-    // Logic for Google Pay payment
   }
 }
 

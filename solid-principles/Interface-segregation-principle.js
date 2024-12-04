@@ -1,15 +1,19 @@
 class Notification {
-  sendEmail() {}
-  sendSMS() {}
+  sendEmail() {
+    throw new Error("Method 'sendEmail()' must be implemented.");
+  }
+  sendSMS() {
+    throw new Error("Method 'sendSMS()' must be implemented.");
+  }
 }
 
 class EmailNotification extends Notification {
   sendEmail() {
     console.log("Email sent.");
   }
-  sendSMS() {
-    throw new Error("EmailNotification doesn't support SMS."); // Unnecessary implementation
-  }
+
+  // Force to implement, otherwise raised error
+  // sendSMS() { }
 }
 
 const emailNotification = new EmailNotification();
